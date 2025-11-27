@@ -1,6 +1,6 @@
 {
   "name": "pick-cli",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "PiCK 학생 사용자를 위한 빠르고 간단한 CLI 앱",
   "main": "bin/pick.js",
   "type": "module",
