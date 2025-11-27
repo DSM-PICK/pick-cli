@@ -43,8 +43,7 @@ const healthCheck = async () => {
 
 /**
  * @typedef {object} QueryTodaySelfStudyTeacherResponse
- * @property {number} grade
- * @property {number} class_num
+ * @property {number} floor
  * @property {string} teacher_name
  */
 
@@ -325,5 +324,6 @@ export default {
   application,
   queryMyApplication,
   moveClassroom,
-  queryMoveClassroom
+  queryMoveClassroom,
+  queryTodaySelfStudyTeacher
 };

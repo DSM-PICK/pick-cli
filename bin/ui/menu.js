@@ -41,8 +41,8 @@ export async function showMainMenu() {
     name: 'action',
     message: chalk.cyan('원하는 기능을 선택하세요:'),
     choices: [
-      { title: '📚 오늘 시간표', value: 'timetable' },
-      { title: '🍽️ 주말 급식 신청', value: 'meal' },
+      { title: '📚 시간표+자감쌤', value: 'timetable' },
+      { title: '🍽️  주말 급식 신청', value: 'meal' },
       { title: '🏃 조기 귀가', value: 'early_return' },
       { title: '🚪 외출 신청', value: 'application' },
       { title: '🏠 교실 이동', value: 'classroom' },
