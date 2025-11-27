@@ -103,8 +103,8 @@ export async function handleClassroom() {
         await api.moveClassroom({
           floor: floorChoice.floor,
           classroom_name: classroomChoice.classroom_name,
-          start: form.start + "교시",
-          end: form.end + "교시"
+          start: form.start,
+          end: form.end
         });
         spinner.succeed(chalk.green('교실 이동 신청이 완료되었습니다!'));
         await new Promise(resolve => setTimeout(resolve, 2000));
