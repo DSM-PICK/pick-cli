@@ -39,14 +39,14 @@ export async function showMainMenu() {
   const choice = await prompts({
     type: 'select',
     name: 'action',
-    message: chalk.cyan('원하는 기능을 선택하세요:'),
+    message: chalk.cyan('원하는 기능을 선택하세요'),
     choices: [
-      { title: '📚 시간표+자감쌤', value: 'timetable' },
-      { title: '🍽️  주말 급식 신청', value: 'meal' },
+      { title: '📅 시간표 조회', value: 'timetable' },
+      { title: '🍚 급식', value: 'meal' },
       { title: '🏃 조기 귀가', value: 'early_return' },
-      { title: '🚪 외출 신청', value: 'application' },
-      { title: '🏠 교실 이동', value: 'classroom' },
-      { title: '⚙️  설정', value: 'settings' },
+      { title: '📝 외출 신청', value: 'application' },
+      { title: '🏫 교실 이동', value: 'classroom' },
+      { title: '⚙️ 설정', value: 'settings' },
       { title: '🚪 종료', value: 'exit' }
     ]
   });

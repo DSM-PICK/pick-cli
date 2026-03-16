@@ -7,7 +7,7 @@ import process from 'process';
 import api from './api.js';
 import { login } from './handlers/auth.js';
 import { handleTimetable } from './handlers/timetable.js';
-import { handleWeekendMeal } from './handlers/weekend-meal.js';
+import { handleMeal } from './handlers/meal.js';
 import { handleEarlyReturn } from './handlers/early-return.js';
 import { handleApplication } from './handlers/out-application.js';
 import { handleClassroom } from './handlers/classroom-move.js';
@@ -52,8 +52,6 @@ async function main() {
     }
   ));
 
-  checkForUpdatesQuietly().catch(() => {});
-
   const connected = await checkConnection();
   if (!connected) {
     process.exit(1);
@@ -63,6 +61,7 @@ async function main() {
   if (!loginSuccess) return;
 
   await initUserInfo();
+  await checkForUpdatesQuietly();
 
   while (true) {
     const action = await showMainMenu();
@@ -86,7 +85,7 @@ async function main() {
           break;
 
         case 'meal':
-          await handleWeekendMeal();
+          await handleMeal();
           break;
 
         case 'early_return':

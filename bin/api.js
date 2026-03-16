@@ -104,6 +104,18 @@ const healthCheck = async () => {
  * @property {Array<{ subject_name: string }>} timetables
  */
 
+/**
+ * @typedef {object} MealEntry
+ * @property {string[]} menu
+ * @property {string} cal
+ */
+
+/**
+ * @typedef {object} MealDetailsResponse
+ * @property {string} date
+ * @property {{ breakfast?: MealEntry, lunch?: MealEntry, dinner?: MealEntry }} meal_list
+ */
+
 const createToken = () => {
   let token = null;
   return {
@@ -311,6 +323,18 @@ const getTodayTimetable = () => {
   });
 };
 
+/**
+ * 급식 조회
+ * @param {{ date: string }} params
+ * @returns {Promise<MealDetailsResponse>}
+ */
+const getMealByDate = (params) => {
+  return fetchApi("/meal/date", {
+    method: "GET",
+    params,
+  });
+};
+
 export default {
   accessToken,
   healthCheck,
@@ -325,5 +349,6 @@ export default {
   queryMyApplication,
   moveClassroom,
   queryMoveClassroom,
-  queryTodaySelfStudyTeacher
+  queryTodaySelfStudyTeacher,
+  getMealByDate
 };
