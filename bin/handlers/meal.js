@@ -33,14 +33,27 @@ function renderMealSection(type, meal) {
 
 async function promptMealDate() {
   const response = await prompts({
-    type: 'text',
+    type: 'date',
     name: 'date',
-    message: chalk.cyan('조회할 날짜를 입력하세요 (YYYY-MM-DD)'),
-    initial: formatDate(new Date()),
-    validate: (value) => /^\d{4}-\d{2}-\d{2}$/.test(value) ? true : 'YYYY-MM-DD 형식으로 입력하세요.'
+    message: chalk.cyan('조회할 날짜를 고르세요 (← → 이동, ↑ ↓ 변경)'),
+    initial: new Date(),
+    mask: 'YYYY-MM-DD',
+    onRender() {
+      if (!this.firstRender) {
+        return;
+      }
+
+      const dayIndex = this.parts.findIndex((part) => typeof part === 'object' && part?.token === 'DD');
+      if (dayIndex !== -1) {
+        this.cursor = dayIndex;
+      }
+    },
+    validate: (value) => value instanceof Date && !Number.isNaN(value.getTime())
+      ? true
+      : '날짜를 선택해 주세요.'
   });
 
-  return response.date;
+  return response.date ? formatDate(response.date) : undefined;
 }
 
 async function handleMealLookup() {
@@ -89,11 +102,11 @@ export async function handleMeal() {
   const action = await prompts({
     type: 'select',
     name: 'action',
-    message: '원하는 기능을 선택하세요',
+    message: '원하는 기능을 선택하세요.',
     choices: [
       { title: '🍽️ 날짜별 급식 조회', value: 'lookup' },
       { title: '🗓️ 주말 급식 신청', value: 'weekend' },
-      { title: '↩ 뒤로 가기', value: 'back' }
+      { title: '⬅️ 뒤로 가기', value: 'back' }
     ]
   });
 
