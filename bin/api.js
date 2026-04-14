@@ -101,7 +101,7 @@ const healthCheck = async () => {
 /**
  * @typedef {object} DayTimetableResponse
  * @property {string} date
- * @property {Array<{ subject_name: string }>} timetables
+ * @property {Array<{ subject_name: string }> | Record<string, { subject_name: string }>} timetables
  */
 
 /**
@@ -187,7 +187,10 @@ const fetchApi = async (path, options = {}) => {
 const login = (body) => {
   return fetchApi("/user/login", {
     method: "POST",
-    body: body,
+    body: {
+      ...body,
+      os: "ADMIN"
+    },
   });
 };
 
@@ -328,6 +331,12 @@ const getTodayTimetable = () => {
  * @param {{ date: string }} params
  * @returns {Promise<MealDetailsResponse>}
  */
+const getWeekTimetable = () => {
+  return fetchApi("/timetable/week", {
+    method: "GET",
+  });
+};
+
 const getMealByDate = (params) => {
   return fetchApi("/meal/date", {
     method: "GET",
@@ -341,6 +350,7 @@ export default {
   login,
   queryUserSimpleInfo,
   getTodayTimetable,
+  getWeekTimetable,
   changeStatus,
   queryMyWeekendMealStatus,
   createEarlyReturn,
